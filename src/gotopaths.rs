@@ -77,9 +77,21 @@ impl GotoPaths {
     }
     */
     /// Displays the option related to the path which is displayed at the left.
-    pub fn display_options(&self) {
+    pub fn display_options(&self, verify_existance: bool) {
         for (k, v) in &self.option_paths {
-            eprintln!("[{}] {}", k.green(), v)
+            eprintln!(
+                "[{}] {}",
+                k.green(),
+                if !verify_existance {
+                    v.to_string()
+                } else {
+                    if std::path::Path::new(&v).is_dir() {
+                        v.green().to_string()
+                    } else {
+                        format!("{} (doesn't exist)", v.red()).to_string()
+                    }
+                }
+            )
         }
     }
 }

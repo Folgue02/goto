@@ -16,18 +16,18 @@ impl GotoMenu {
 
         loop {
             // Display options
-            self.paths.display_options();
+            // TODO: Change with cli flags.
+            self.paths.display_options(true);
 
             // Ask for input
             let mut choice = String::new();
-            println!(
+            print!(
                 "{}",
                 "Select the path you want by typing the chars related to it: ".green()
             );
             stdout().flush().unwrap();
             stdin().read_line(&mut choice).unwrap();
             choice = choice.trim().to_string();
-
             if let Some(p) = self.paths.option_paths.get(&choice) {
                 return Some(p.clone());
             } else if choice == "q" {
