@@ -2,6 +2,7 @@ use std::fs::File;
 use std::io::Write;
 
 mod cmdconfig;
+mod collections;
 mod gotopaths;
 mod menu;
 
