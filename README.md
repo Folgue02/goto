@@ -4,17 +4,17 @@
 ## How to use
 
 ### 1. Declaring the directories you usually 'cd' into.
-Goto reads the file `~/.gotopaths` to fetch what directories to display with what menu option related with.<br>
+Goto reads the file `~/.gotopaths` to fetch what directories to display with what menu alias related with.<br>
 This file has its own format, and in the case of not following the specified format, that **directory listed with the invalid format won't be displayed**. An example of a valid gotopaths file its shown below:
 ```
-/a/directory/you/want/to/access/quickly;itsoption
+/a/directory/you/want/to/access/quickly;itsalias
 /home/user/Desktop;desk
 ```
-***NOTE***: Keep in mind that the path you write in the file **can be displayed without existing**, and this will make your shell error when trying to '*cd*' into it. (*In the future I'll make it so paths that doesn't exist get displayed with a different color.*)
+***NOTE***: Keep in mind that the path you write in the file **can be displayed without existing**, and this will make your shell error when trying to '*cd*' into it.
 
-The paths and its options from above will be displayed like this in goto's menu:
+The paths and its aliases from above will be displayed like this in goto's menu:
 ```
-[itsoption] /a/directory/you/want/to/access/quickly
+[itsalias] /a/directory/you/want/to/access/quickly
 [desk] /home/user/Desktop
 ```
 
