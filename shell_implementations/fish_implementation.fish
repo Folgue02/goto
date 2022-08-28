@@ -20,7 +20,7 @@ function goto
             rm $exchange_path
         end
 
-        $goto
+        $goto $argv
 
         if test -f $exchange_path
             set target_path (/bin/cat $exchange_path)

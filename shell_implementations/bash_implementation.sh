@@ -16,7 +16,8 @@ goto() {
     fi
 
     if [ -f $GOTO ]; then
-        $GOTO
+        $GOTO $@
+
 
         if [ -f $EXCHANGE_PATH ]; then 
             TARGET_PATH=$(cat $EXCHANGE_PATH)
@@ -33,4 +34,4 @@ goto() {
     fi
 }
 
-goto
+goto $@

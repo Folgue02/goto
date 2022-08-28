@@ -3,7 +3,7 @@
 # To make this script usable just copy the function below and paste
 # it in your $profile file (`~/.config/powershell/Microsoft.Powershell_profile.ps1`)
 
-function goto () {
+function goto ([String]$whereto=$null) {
     ## The first one is useful for testing, the second one is the one 
     ## supposed to be used in production
 
@@ -20,7 +20,12 @@ function goto () {
             Remove-Item $exchange_path
         }
 
-        Start-Process $goto -Wait
+        if ($whereto -eq $null) {
+            Start-Process $goto -Wait
+        } else {
+            Start-Process $goto -Wait -Args $whereto
+        }
+
         if (Test-Path $exchange_path) {
             $target_path = (Get-Content $exchange_path).Trim()
             Write-Host "Setting location to '$target_path'..."
@@ -35,4 +40,4 @@ function goto () {
     }
 }
 
-goto
+goto $args
