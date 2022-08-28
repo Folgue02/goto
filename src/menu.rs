@@ -11,14 +11,13 @@ impl GotoMenu {
         Self { paths: gps }
     }
 
-    /// Displays the menu and returns the path chosen by the user wrapped in a `Some`, 
+    /// Displays the menu and returns the path chosen by the user wrapped in a `Some`,
     /// if the user quits from the menu this method will return a `None`
     pub fn show(&self) -> Option<String> {
         eprintln!("{}", "GOTO?".red());
 
         loop {
             // Display options
-            // TODO: Change with cli flags.
             self.paths.display_options(true);
 
             // Ask for input

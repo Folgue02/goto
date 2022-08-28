@@ -1,10 +1,11 @@
 use std::ops::Index;
 
-pub struct SortedHashMap<K: PartialEq, V> {
+#[derive(Clone)]
+pub struct SortedHashMap<K: PartialEq + Clone, V: Clone> {
     collection: Vec<(K, V)>,
 }
 
-impl<K: PartialEq, V> SortedHashMap<K, V> {
+impl<K: PartialEq + Clone, V: Clone> SortedHashMap<K, V> {
     pub fn new() -> Self {
         Self {
             collection: Vec::new(),
@@ -35,7 +36,7 @@ impl<K: PartialEq, V> SortedHashMap<K, V> {
 }
 
 // Into iterator
-impl<'a, K: PartialEq, V> IntoIterator for &'a SortedHashMap<K, V> {
+impl<'a, K: PartialEq + Clone, V: Clone> IntoIterator for &'a SortedHashMap<K, V> {
     type Item = &'a (K, V);
     type IntoIter = SortedHashMapIterator<'a, K, V>;
 
@@ -47,7 +48,7 @@ impl<'a, K: PartialEq, V> IntoIterator for &'a SortedHashMap<K, V> {
     }
 }
 
-impl<K: PartialEq, V> Index<K> for SortedHashMap<K, V> {
+impl<K: PartialEq + Clone, V: Clone> Index<K> for SortedHashMap<K, V> {
     type Output = V;
 
     fn index(&self, index: K) -> &Self::Output {
@@ -60,12 +61,12 @@ impl<K: PartialEq, V> Index<K> for SortedHashMap<K, V> {
     }
 }
 
-pub struct SortedHashMapIterator<'a, K: PartialEq, V> {
+pub struct SortedHashMapIterator<'a, K: PartialEq + Clone, V: Clone> {
     count: usize,
     shm: &'a SortedHashMap<K, V>,
 }
 
-impl<'a, K: PartialEq, V> Iterator for SortedHashMapIterator<'a, K, V> {
+impl<'a, K: PartialEq + Clone, V: Clone> Iterator for SortedHashMapIterator<'a, K, V> {
     type Item = &'a (K, V);
 
     fn next(&mut self) -> Option<Self::Item> {

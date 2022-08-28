@@ -1,6 +1,7 @@
 use colored::Colorize;
 use crate::collections::SortedHashMap;
 
+#[derive(Clone)]
 pub struct GotoPaths {
     pub option_paths: SortedHashMap<String, String>,
 }
