@@ -1,12 +1,11 @@
 use std::fs;
 use std::fs::File;
 use std::io;
-use std::io::Read;
-use std::io::Write;
+use std::io::{Read, Write};
 use std::os::unix::fs::PermissionsExt;
 
 use crate::gotopaths::GotoPaths;
-use crate::menu::GotoMenu;
+use crate::menu::show;
 
 pub struct Config {
     path_file: String,
@@ -51,6 +50,7 @@ impl Config {
         }
     }
 
+    /// Returns a `GotoPaths` produced by reading `self.path_file`
     pub fn get_gotopaths(&self) -> GotoPaths {
         let mut file_content = String::new();
         File::open(&self.path_file)
@@ -60,10 +60,13 @@ impl Config {
         GotoPaths::from_string(file_content)
     }
 
+    /// Writes the path that corresponds to the option selected by the user.
+    /// This option can be '*selected*' either by prompting the user after showing a menu with all
+    /// the available options, or by setting `self.selected_option` to `Some("Option")`. If the
+    /// option is '*selected*' by command line arguments, neither the menu nor the prompt will
+    /// appear.
     pub fn execute(&self) -> Result<(), ()> {
         let gps = self.get_gotopaths();
-
-        let menu = GotoMenu::new(gps.clone());
 
         if let Some(option) = &self.selected_option {
             if let Some(path) = gps.option_paths.get(option) {
@@ -82,8 +85,7 @@ impl Config {
                 return Err(())
             }
         } else {
-            // BUG: Doesn't show the gotopaths
-            match menu.show() {
+            match show(&gps) {
                 Some(choice) => {
                     match File::create(crate::EXCHANGE_PATH)
                         .unwrap()

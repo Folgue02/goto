@@ -26,7 +26,6 @@ goto() {
             rm $EXCHANGE_PATH
         else
             # Nothing was selected in the goto process
-            cd $(cat $EXCHANGE_PATH)
             echo "Nothing was selected in goto."
         fi
     else

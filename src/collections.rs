@@ -1,5 +1,6 @@
 use std::ops::Index;
 
+/// A workaround for creating HashMaps with order
 #[derive(Clone)]
 pub struct SortedHashMap<K: PartialEq + Clone, V: Clone> {
     collection: Vec<(K, V)>,
